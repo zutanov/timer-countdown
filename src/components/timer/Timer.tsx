@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as style from './timer.styles';
+import React from 'react';
 
 export type STimerBtnProps = {
     onClick: () => void;
@@ -7,7 +8,7 @@ export type STimerBtnProps = {
     isContinue: boolean;
 };
 
-const Timer = () => {
+const Timer = React.memo(function Timer() {
     const [isPause, setIsPause] = useState(false);
     const [cont, setCont] = useState(false);
     const [btnName, setBtnName] = useState('Start');
@@ -26,22 +27,6 @@ const Timer = () => {
         setBtnName('Pause');
         setIsPause(true);
     }
-    useEffect(() => {
-        if (millisec > 90) {
-            setSecond(second => second + 1);
-            setMillisec(0);
-        } else if (second > 59) {
-            setMinute(minute => minute + 1);
-            setMillisec(0);
-            setSecond(0);
-        } else if (minute > 59) {
-            setMillisec(0);
-            setSecond(0);
-            setMinute(0);
-            clearInterval(timerIdRef.current);
-            timerIdRef.current = undefined;
-        }
-    }, [millisec]);
 
     function pause() {
         setIsPause(false);
@@ -63,6 +48,23 @@ const Timer = () => {
     }
 
     const addZero = (n: number): string => (n < 10 ? `0${n}` : n.toString());
+
+    useEffect(() => {
+        if (millisec > 90) {
+            setSecond(second => second + 1);
+            setMillisec(0);
+        } else if (second > 59) {
+            setMinute(minute => minute + 1);
+            setMillisec(0);
+            setSecond(0);
+        } else if (minute > 59) {
+            setMillisec(0);
+            setSecond(0);
+            setMinute(0);
+            clearInterval(timerIdRef.current);
+            timerIdRef.current = undefined;
+        }
+    }, [millisec]);
 
     return (
         <style.STimer>
@@ -96,6 +98,6 @@ const Timer = () => {
             </style.STimerBtns>
         </style.STimer>
     );
-};
+});
 
 export default Timer;

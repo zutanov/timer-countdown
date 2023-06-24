@@ -59,13 +59,13 @@ export const STimerBtn = styled.button<STimerBtnProps>`
 
 export const STimerBtnGreen = styled(STimerBtn)`
     color: #ffffff;
-    background-color: ${props => (props.isPaused ? '#f48d33' : props.isContinue ? '#4f84e7' : '#03ae85')};
-    border-color: ${props => (props.isPaused ? '#f48d33' : props.isContinue ? '#4f84e7' : '#03ae85')};
+    background-color: ${({ isPaused, isContinue }) => (isPaused ? '#f48d33' : isContinue ? '#4f84e7' : '#03ae85')};
+    border-color: ${({ isPaused, isContinue }) => (isPaused ? '#f48d33' : isContinue ? '#4f84e7' : '#03ae85')};
 `;
 
 export const STimerBtnRed = styled(STimerBtn)`
     color: #ffffff;
     background-color: #fd6259;
     border-color: #fd6259;
-    display: ${props => (!props.isPaused && !props.isContinue ? 'none' : 'block')};
+    display: ${({ isPaused, isContinue }) => (!isPaused && !isContinue ? 'none' : 'block')};
 `;
