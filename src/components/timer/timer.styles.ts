@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { STimerBtnProps } from './Timer';
 
 export const STimer = styled.div`
+    margin-right: 100px;
     padding: 18px 24px 60px;
     width: 431px;
     height: 313px;
